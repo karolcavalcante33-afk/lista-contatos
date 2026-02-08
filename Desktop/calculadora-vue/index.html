@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora VueJS</title>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .card {
+        background: #ffffff;
+        padding: 28px;
+        border-radius: 12px;
+        width: 320px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #4f46e5;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 14px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: #4f46e5;
+    }
+
+    .resultado {
+        margin-top: 16px;
+        padding: 12px;
+        background: #eef2ff;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+        color: #1e1b4b;
+    }
+</style>
+
+</head>
+<body>
+
+<div id="app" class="card">
+    <h2>Calculadora</h2>
+
+    <input type="number" v-model.number="num1" placeholder="Primeiro número">
+    <input type="number" v-model.number="num2" placeholder="Segundo número">
+
+    <select v-model="operacao">
+  <option value="+">Soma (+)</option>
+  <option value="-">Subtração (-)</option>
+  <option value="*">Multiplicação (×)</option>
+  <option value="/">Divisão (÷)</option>
+</select>
+
+
+    <div class="resultado">
+        Resultado: {{ resultado }}
+    </div>
+</div>
+
+<script>
+const { createApp } = Vue
+
+createApp({
+    data() {
+        return {
+            num1: 0,
+            num2: 0,
+            operacao: '+'
+        }
+    },
+    computed: {
+        resultado() {
+            switch (this.operacao) {
+                case '+':
+                    return this.num1 + this.num2
+                case '-':
+                    return this.num1 - this.num2
+                case '*':
+                    return this.num1 * this.num2
+                case '/':
+                    return this.num2 !== 0 ? this.num1 / this.num2 : 'Erro'
+                default:
+                    return 0
+            }
+        }
+    }
+}).mount('#app')
+</script>
+
+</body>
+</html>
